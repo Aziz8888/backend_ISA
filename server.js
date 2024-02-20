@@ -1,62 +1,32 @@
-import express from "express";
-import mongoose from "mongoose";
-import morgan from "morgan";
-import cors from "cors";
-import { notFoundError } from "./middlewares/error-handler.js";
-import { errorHandler } from "./middlewares/error-handler.js";
-import testRoutes from "./routes/testRouter.js";
+import express from 'express';
+import connectToDatabase from './database.js'; // Chemin vers votre fichier de connexion à la base de données
+import teacherRoutes from './routes/Teacher.js';
+import { notFoundError,errorHandler } from './middlewares/error-handler.js';
+import path from 'path';
+import bodyParser from 'body-parser';
+// Appel de la fonction pour se connecter à la base de données
+import cors from 'cors';
+const port = process.env.PORT
+connectToDatabase();
 
-
-// Creating an express app
+// Initialisation de l'application Express
 const app = express();
 
-// Setting the port number for the server (default to 9090 if not provided)
-const PORT = 9090 || process.env.PORT;
-
-// Specifying the MongoDB database name
-const databaseName = 'examen2024';
-
-// Enabling debug mode for mongoose
-mongoose.set('debug', true);
-
-// Setting the global Promise library
-mongoose.Promise = global.Promise;
-
-// Connecting to the MongoDB database
-mongoose.connect(`mongodb://127.0.0.1:27017/${databaseName}`)
-    .then(() => {
-        console.log(`Connected to ${databaseName}`);
-    })
-    .catch((error) => {
-        console.log(error);
-    });
-
-// Enabling Cross-Origin Resource Sharing
-app.use(cors());
-
-// Using morgan for logging HTTP requests
-app.use(morgan('dev')); 
-
-// Parsing JSON request bodies
+// Middleware pour parser le corps des requêtes en JSON
 app.use(express.json());
+app.use(cors());
+app.use(bodyParser.json());
 
-// Parsing URL-encoded request bodies with extended format
-app.use(express.urlencoded({ extended: true }));
-
-// Serving static files (images) from the 'public/images' directory
-app.use('/img', express.static('public/images'));
-
-
-// Importing the routes for the 'tests' resource
-app.use('/tests', testRoutes);
-
-// Using custom middleware for handling 404 errors
+// Définition des routes
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+app.use('/api/teachers', teacherRoutes);
 app.use(notFoundError);
+app.use(errorHandler);
 
-// Using custom middleware for handling general errors
-app.use(errorHandler); 
-
-// Starting the server and listening on the specified port
+// Démarre le serveur sur le port spécifié dans le fichier .env ou le port 5000 par défaut
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

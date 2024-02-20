@@ -1,26 +1,16 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-// Destructuring the Schema and model objects from the mongoose module
 const { Schema, model } = mongoose;
 
-// Creating a new Mongoose schema for the 'Test' model
 const testSchema = new Schema({
-    // Defining a field 'name' of type String, which is required
-    name: {
-        type: String,
-        required: true
-    },
-    
-    // Defining a field 'image' of type String, which is required
-    image: {
-        type: String,
-        required: true
-    }
-},
-// Additional configuration for the schema, enabling timestamps (createdAt and updatedAt)
-{
-    timestamps: true
+  idTest: { type: Number, required: true },
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  duration: { type: Number, required: true },
+  type: { type: String, required: true }, 
+  marks: { type: Number, required: true }
 });
 
-// Creating and exporting the 'Test' model using the defined schema
-export default model('Test', testSchema);
+const Test = model('Test', testSchema);
+
+export default Test;
