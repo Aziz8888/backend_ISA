@@ -7,7 +7,7 @@ export async function createQAQuestion(req,res,next) {
     const newQAQuestion = new Question({
         complexity,
         question,
-        motsClés,
+        response,
         marks, 
         type:'QA',
         image
