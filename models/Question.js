@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
 const questionSchema = new Schema({
+  test: { type: Schema.Types.ObjectId, ref: 'Test' },
   complexity: { type: Number, required: true },
   question: { type: String, required: true },
   response: { type: String, required: true },

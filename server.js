@@ -14,6 +14,7 @@ import cors from 'cors';
 connectToDatabase();
 
 // Initialisation de l'application Express
+const hostname = '0.0.0.0';
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -38,6 +39,6 @@ app.use(errorHandler);
 
 // Démarre le serveur sur le port spécifié dans le fichier .env ou le port 5000 par défaut
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const server = app.listen(0,hostname,() => {
+  console.log('Server listening on port:', server.address().port);
 });

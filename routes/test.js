@@ -1,8 +1,25 @@
 import express from 'express';
 const router = express.Router();
-import { createTest } from '../controllers/test.js';
+import { createTest, deleteTestById, getAllTests, getTestByTitle, updateTest } from '../controllers/test.js';
+
 router
   .route('/createTest')
   .post(createTest);
 
+router
+  .route('/updateTest/:id')
+  .put(updateTest);  
+
+router
+  .route('/getAllTests')
+  .get(getAllTests);
+
+router
+  .route('/getTest')
+  .get(getTestByTitle);
+
+router
+  .route('/deleteTest')
+  .delete(deleteTestById);
+  
 export default router;

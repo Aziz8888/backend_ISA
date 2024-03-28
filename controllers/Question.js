@@ -2,12 +2,12 @@ import Question from '../models/Question.js';
 
 export async function createQAQuestion(req,res,next) {
   try {
-    const { complexity,question, response, marks, type} = req.body;
+    const { complexity,question, motsClés, marks, type} = req.body;
     const image = `${req.protocol}://${req.get('host')}/img/${req.file.filename}`;
     const newQAQuestion = new Question({
         complexity,
         question,
-        response,
+        motsClés,
         marks, 
         type:'QA',
         image
@@ -21,8 +21,8 @@ export async function createQAQuestion(req,res,next) {
 
 export async function createQuizQuestion(req,res,next) {
     try {
-      const { complexity,question, response, marks, type, options, image} = req.body;
-  
+      const { complexity,question, response, marks, type, options} = req.body;
+      const image = `${req.protocol}://${req.get('host')}/img/${req.file.filename}`;
       const newQuizQuestion = new Question({
           complexity,
           question,
