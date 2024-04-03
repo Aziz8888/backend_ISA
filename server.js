@@ -1,6 +1,8 @@
 import express from 'express';
 import connectToDatabase from './database.js'; // Chemin vers votre fichier de connexion à la base de données
 import teacherRoutes from './routes/Teacher.js';
+import performanceRoutes from './routes/Performance.js';
+
 import { notFoundError,errorHandler } from './middlewares/error-handler.js';
 import path from 'path';
 import bodyParser from 'body-parser';
@@ -22,6 +24,8 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 app.use('/api/teachers', teacherRoutes);
+app.use('/api/performance', performanceRoutes);
+
 app.use(notFoundError);
 app.use(errorHandler);
 
