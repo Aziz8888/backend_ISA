@@ -31,6 +31,21 @@ app.use(morgan("dev"));
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
+
+app.get('/upload/:folder/:filename',(req,res)=> {
+  const {filename , folder} = req.params;
+ 
+  const iamgePath = (path.join(__dirname, 'uploads', folder , filename));
+  fs.access(iamgePath , fs.constants.F_OK, (err) => {
+    if (err) {
+      res.status(404).send('File not found')
+      console.log(iamgePath)
+    } else {
+      res.sendFile(iamgePath)
+    }
+  })
+})
+
 app.use('/teachers', teacherRoutes);
 app.use('/Question', questionRoutes);
 app.use('/test', testRoutes);

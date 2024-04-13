@@ -4,7 +4,10 @@ import Question from '../models/Question.js';
 export async function createTest(req, res, next) {
   try {
     const { idTeacher, title, description, duration, questions } = req.body;
-
+    const numberOfQuestions = questions.length;
+    if (duration > 2 * numberOfQuestions) {
+      return res.status(400).json({ message: "Duration must be less than or equal to 2 times the number of questions" });
+    }
     // Create a new test instance
     const newTest = new Test({
       idTeacher,

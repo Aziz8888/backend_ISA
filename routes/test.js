@@ -19,7 +19,7 @@ router
   .get(getTestByTitle);
 
 router
-  .route('/deleteTest')
+  .route('/deleteTest/:id')
   .delete(deleteTestById);
   
 export default router;
