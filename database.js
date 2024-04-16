@@ -11,9 +11,9 @@ const connectToDatabase = async () => {
       useUnifiedTopology: true,
     });
 
-    console.log('Connected to MongoDB Atlas EduSwift');
+    console.log('Connected to MongoDB Atlas');
   } catch (error) {
-    console.error('MongoDB connection error:', error); 
+    console.error('MongoDB connection error:', error); // Afficher l'erreur complète
   }
 };
 

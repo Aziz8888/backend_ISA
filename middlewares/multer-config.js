@@ -1,6 +1,7 @@
-import multer, { diskStorage } from "multer";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
+import multer from 'multer';
+import { diskStorage } from 'multer';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
 // MIME types for supported image formats
 const MIME_TYPES = {
@@ -9,27 +10,29 @@ const MIME_TYPES = {
     "image/png": "png",
 };
 
-// Exporting a middleware function that configures multer for handling file uploads
-export default multer({
-    // Configuring multer with disk storage
-    storage: diskStorage({
-        // Setting the destination for uploaded files
-        destination: (req, file, callback) => {
-            // Getting the current directory using dirname and fileURLToPath
-            const __dirname = dirname(fileURLToPath(import.meta.url));
+// Get the current directory using fileURLToPath and dirname
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-            // Callback to specify the destination path
-            callback(null, join(__dirname, "../public/images"));
-        },
-        // Setting the filename for uploaded files
-        filename: (req, file, callback) => {
-            // Getting the file extension based on MIME type
-            const extension = MIME_TYPES[file.mimetype];
+// Multer configuration for handling file uploads
+const storage = diskStorage({
+    // Setting the destination for uploaded files
+    destination: (req, file, callback) => {
+        callback(null, join(__dirname, "../public/images"));
+    },
+    // Setting the filename for uploaded files
+    filename: (req, file, callback) => {
+        // Generating a unique filename with a timestamp and extension
+        const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1E9);
+        const extension = MIME_TYPES[file.mimetype];
+        callback(null, `${uniqueSuffix}.${extension}`);
+    }
+});
 
-            // Callback to specify the filename with a timestamp and extension
-            callback(null, Date.now() + "." + extension);
-        },
-    }),
+// Middleware function to handle file uploads
+const upload = multer({
+    storage: storage,
     // Setting size limits for uploaded files (512 KB in this case)
-    limits: 512 * 1024,
+    limits: { fileSize: 512 * 1024 }
 }).single("image");
+
+export default upload;
