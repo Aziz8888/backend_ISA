@@ -6,6 +6,8 @@ import compilateur from './routes/compilateur.js';
 import { notFoundError,errorHandler } from './middlewares/error-handler.js';
 import path from 'path';
 import questionRoutes from './routes/Question.js';
+import performancesRoutes from './routes/performance.js';
+import studentsRoutes from './routes/student.js';
 import testRoutes from './routes/test.js';
 import bodyParser from 'body-parser';
 // Appel de la fonction pour se connecter à la base de données
@@ -14,12 +16,9 @@ const port = process.env.PORT
 connectToDatabase();
 
 // Initialisation de l'application Express
-const hostname = '0.0.0.0';
+
 const app = express();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-mongoose.set('debug', true);
-mongoose.Promise = global.Promise;
+
 // Middleware pour parser le corps des requêtes en JSON
 app.use(express.json());
 app.use(cors());
@@ -42,8 +41,11 @@ app.get('/upload/:folder/:filename',(req,res)=> {
     }
   })
 })
+app.use('/api/students',studentsRoutes);
+app.use('/api/performances',performancesRoutes);
 app.use('/api/teachers', teacherRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/user/email', userRoutes);
 app.use('/Question', questionRoutes);
 app.use('/test', testRoutes);
 app.use('/compilateur', compilateur);

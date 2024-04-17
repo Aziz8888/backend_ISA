@@ -1,6 +1,6 @@
 import express from 'express';
 import { createQAQuestion, createQuizQuestion, deleteQuestionById, getAllQuestions, getQuestionById, updateQuestion } from '../controllers/Question.js';
-import upload from '../middlewares/multerconfig.js'; // Import the upload middleware
+import upload from '../middlewares/multer-config.js'; // Import the upload middleware
 
 const router = express.Router();
 
