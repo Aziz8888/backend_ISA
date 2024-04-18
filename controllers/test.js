@@ -1,29 +1,89 @@
 import Test from '../models/test.js';
-import Question from '../models/Question.js';
-
-export async function createTest(req, res, next) {
+/*
+export async function createTest(req, res) {
   try {
-    const { idTeacher, title, description, duration, questions } = req.body;
-    const numberOfQuestions = questions.length;
-    if (duration > 2 * numberOfQuestions) {
-      return res.status(400).json({ message: "Duration must be less than or equal to 2 times the number of questions" });
-    }
-    // Create a new test instance
+    const { idTeacher, title, description, duration, questions, testDate } = req.body;
+
+    // Map over the questions array and create new Question instances
+    const questionObjects = questions.map(questionData => {
+      const { complexity, question, response, marks, chapitre, type, image } = questionData;
+      return new Question({
+        complexity,
+        question,
+        response,
+        marks,
+        chapitre:'Les classes et les objets',
+        type:'QA',
+        image
+      });
+    });
+
+    // Create a new test instance with the populated questions array
     const newTest = new Test({
       idTeacher,
       title,
       description,
       duration,
-      questions: questions // Assign array of question IDs
+      questions: questionObjects,
+      testDate
     });
 
+    // Save the new test instance to the database
     await newTest.save();
+
+    // Populate the questions field with the actual Question objects
     await newTest.populate('questions');
+
+    // Return the newly created test with populated questions
     res.status(201).json(newTest);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 }
+*/ // Assurez-vous d'importer les modèles nécessaires
+
+export async function createTest(req, res) {
+  try {
+    const { idTeacher, title, description, duration, questions, testDate } = req.body;
+
+    // Map over the questions array and create new Question instances
+    const questionObjects = questions.map(questionData => {
+      const { complexity, question, response, marks, options, chapitre, type, image } = questionData;
+      return new Question({
+        complexity,
+        question,
+        response,
+        marks,
+        options,
+        //chapitre, // Ajout de 'chapitre' à l'instance de question
+        type, // Ajout de 'type' à l'instance de question
+        image
+      });
+    });
+
+    // Create a new test instance with the populated questions array
+    const newTest = new Test({
+      idTeacher,
+      title,
+      description,
+      duration,
+      questions: questionObjects,
+      testDate
+    });
+
+    // Save the new test instance to the database
+    await newTest.save();
+
+    // Populate the questions field with the actual Question objects
+    await newTest.populate('questions');
+
+    // Return the newly created test with populated questions
+    res.status(201).json(newTest);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
+
 
 // Update a test
 export async function updateTest(req, res, next) {

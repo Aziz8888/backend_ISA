@@ -1,7 +1,7 @@
 import express from 'express';
 import connectToDatabase from './database.js'; // Chemin vers votre fichier de connexion à la base de données
 import teacherRoutes from './routes/Teacher.js';
-import questionRoutes from './routes/Question.js';
+//import questionRoutes from './routes/Question.js';
 import testRoutes from './routes/test.js';
 import { notFoundError,errorHandler } from './middlewares/error-handler.js';
 import path from 'path';
@@ -47,13 +47,13 @@ app.get('/upload/:folder/:filename',(req,res)=> {
 })
 
 app.use('/teachers', teacherRoutes);
-app.use('/Question', questionRoutes);
+//app.use('/Question', questionRoutes);
 app.use('/test', testRoutes);
 app.use(notFoundError);
 app.use(errorHandler);
 
 // Démarre le serveur sur le port spécifié dans le fichier .env ou le port 5000 par défaut
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 const server = app.listen(0,hostname,() => {
   console.log('Server listening on port:', server.address().port);
 });
