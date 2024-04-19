@@ -56,7 +56,7 @@ export async function createTest(req, res) {
         response,
         marks,
         options,
-        //chapitre, // Ajout de 'chapitre' à l'instance de question
+        chapitre, // Ajout de 'chapitre' à l'instance de question
         type, // Ajout de 'type' à l'instance de question
         image
       });
