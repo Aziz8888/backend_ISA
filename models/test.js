@@ -10,7 +10,7 @@ const testSchema = new Schema({
     response: { type: String, required: true },
     marks: { type: Number, required: true },
     options: { type: String, required: false},
-    chapitre: {type: String, enum: ['Les classes et les objets','Le héritage',
+    chapitre: {type: String, enum: ['Les classes et les objets','L héritage',
       'Le polymorphisme','Les interfaces','Encapsulation'],required:false},
     type: { type: String,enum: ['QA','Quiz'], required: true }, 
     image: { type: String,required: false }
