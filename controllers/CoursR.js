@@ -31,8 +31,8 @@ export async function GetCoursR(req, res) {
         res.status(500).json({ error: 'Erreur lors de la récupération du cours' });
     }
 }*/
-import cloudinary from '../middleware/cloudinary.js';
-import CoursR from "../model/CoursR.js";
+import cloudinary from '../middlewares/cloudinary.js';
+import CoursR from "../models/CoursR.js";
 import fs from 'fs';
 import path from 'path';
 
