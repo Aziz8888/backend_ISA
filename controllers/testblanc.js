@@ -1,4 +1,3 @@
-import { config } from "dotenv";
 import axios from "axios";
 import cheerio from "cheerio";
 import { GoogleGenerativeAI } from "@google/generative-ai";
