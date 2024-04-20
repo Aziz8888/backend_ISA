@@ -21,27 +21,7 @@ export async function AjouterCoursR(req, res) {
     }
 }
 
-/*
-import cloudinary from '../middleware/cloudinary.js';
-import CoursR from "../model/CoursR.js";
-import fs from 'fs';
-import path from 'path';
 
-// Ajout de cours
-export async function AjouterCoursR(req, res) {
-    try {
-        const cloudinaryy = await cloudinary.uploader.upload(req.file.path, { resource_type: 'raw' });
-    
-        await CoursR.create({
-            nomCoursR: req.body.nomCoursR,
-            pdff: cloudinaryy.secure_url,
-        });
-
-        res.status(200).json({ message: 'Cours ajouté avec succès' });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-}*/
 
 // Récupération de tous les cours
 export async function GetAllCours(req, res) {
@@ -115,56 +95,3 @@ export async function GetCoursR(req, res) {
     }
 }
 
-/*
-import cloudinary from '../middleware/cloudinary.js';
-import CoursR from "../model/CoursR.js";
-
-export async function AjouterCoursR(req, res) {
-    try {
-        // Cloudinary est déjà initialisé dans votre middleware cloudinary.js
-        const cloudinaryy = await cloudinary.uploader.upload(req.file.path, { resource_type: 'raw' });
-    
-        await CoursR.create({
-            nomCoursR: req.body.nomCoursR,
-            pdff: cloudinaryy.secure_url,
-        });
-
-        res.status(200).json({ message: 'Cours ajouté avec succès' });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-}
-
-// Ajoutez cette fonction dans le fichier
-export async function GetAllCours(req, res) {
-    try {
-        const cours = await CoursR.find();
-
-        if (!cours || cours.length === 0) {
-            return res.status(404).json({ message: 'Aucun cours trouvé' });
-        }
-
-        res.status(200).json(cours);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Erreur lors de la récupération des cours' });
-    }
-}
-
-export async function GetCoursR(req, res) {
-    try {
-        const nomCours = req.params.nomCours;  // Récupérer le nom du cours depuis les paramètres de la requête
-        
-        const cours = await CoursR.findOne({ nomCoursR: nomCours });
-
-        if (!cours) {
-            return res.status(404).json({ message: 'Cours non trouvé' });
-        }
-
-        res.status(200).json(cours);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Erreur lors de la récupération du cours' });
-    }
-}
-*/
