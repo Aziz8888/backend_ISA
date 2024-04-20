@@ -63,5 +63,11 @@ URL: http://localhost:9090/tests/:id
 Method: DELETE
 
 
+## Additional Commands
+
+- *Start in Production Mode:*
+  
+  npm start
+  
 
 Wishing you the best of luck !
