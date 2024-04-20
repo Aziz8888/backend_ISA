@@ -4,14 +4,13 @@ import CoursR from "../models/CoursR.js";
 import fs from 'fs';
 import path from 'path';
 
-// Ajout de cours
 export async function AjouterCoursR(req, res) {
     try {
         const cloudinaryy = await cloudinary.uploader.upload(req.file.path, { resource_type: 'raw' });
     
         await CoursR.create({
             nomCoursR: req.body.nomCoursR,
-            description: req.body.description, // Ajout de la description
+            description: req.body.description, 
             pdff: cloudinaryy.secure_url,
         });
 
@@ -21,9 +20,6 @@ export async function AjouterCoursR(req, res) {
     }
 }
 
-
-
-// Récupération de tous les cours
 export async function GetAllCours(req, res) {
     try {
         const cours = await CoursR.find();
@@ -38,10 +34,10 @@ export async function GetAllCours(req, res) {
         res.status(500).json({ error: 'Erreur lors de la récupération des cours' });
     }
 }
-// Suppression d'un cours par ID
+
 export async function deleteById(req, res) {
     try {
-        const courseId = req.params.id; // Récupérer l'ID du cours depuis les paramètres de la requête
+        const courseId = req.params.id; 
 
         const cours = await CoursR.findById(courseId);
 
@@ -49,11 +45,9 @@ export async function deleteById(req, res) {
             return res.status(404).json({ message: 'Cours non trouvé' });
         }
 
-        // Suppression du fichier PDF de Cloudinary
         const publicId = cours.pdff.split('/').pop().split('.')[0];
         await cloudinary.uploader.destroy(publicId);
 
-        // Suppression du cours de la base de données
         await CoursR.findByIdAndDelete(courseId);
 
         res.status(200).json({ message: 'Cours supprimé avec succès' });
@@ -63,11 +57,9 @@ export async function deleteById(req, res) {
     }
 }
 
-
-// Récupération d'un cours par nom
 export async function GetCoursR(req, res) {
     try {
-        const nomCours = req.params.nomCours;  // Récupérer le nom du cours depuis les paramètres de la requête
+        const nomCours = req.params.nomCours; 
         
         const cours = await CoursR.findOne({ nomCoursR: nomCours });
 
@@ -75,13 +67,11 @@ export async function GetCoursR(req, res) {
             return res.status(404).json({ message: 'Cours non trouvé' });
         }
 
-        // Vérifiez si le fichier PDF existe
         const pdfPath = cours.pdff;
         if (!fs.existsSync(pdfPath)) {
             return res.status(404).json({ message: 'Fichier PDF non trouvé' });
         }
 
-        // Envoyez le fichier PDF en tant que réponse
         const pdfName = path.basename(pdfPath);
         const pdfStream = fs.createReadStream(pdfPath);
 
