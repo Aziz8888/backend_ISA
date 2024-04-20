@@ -16,8 +16,6 @@ const staticVariables = {
 
 const ai = new GoogleGenerativeAI("AIzaSyCb__QQxCrc15mbnhjGDxJOeDMF5K_2NAo");
 
-//const chapters = ["Introduction à Java", "Programmation orientée objet en Java", "Gestion des exceptions et des erreurs en Java", "Collections et types de données en Java", "Fonctionnalités avancées de Java"];
-//const chapters = ["Introduction", "Notions fondamentales", "Programmation orientée objet", "E/S et réseau", "Programmation graphique", "Avancées"];
 
 export async function addCompilateur(req, res) {
   try {
@@ -88,12 +86,11 @@ export async function sendQuizToIA(question) {
     const result = await model.generateContent(question);
     const response = await result.response;
     const text = await response.text();
-    // console.log(`Question: ${question}`);
-    // console.log(`AI Response: ${text}`);
-    return text; // Retourne le texte généré par l'IA
+   
+    return text; 
   } catch (error) {
-    // console.error('Erreur lors de l\'envoi du quiz à l\'IA', error);
-    return "Désolé, je ne peux pas répondre à cette question."; // Retourne une réponse par défaut
+ 
+    return "Désolé, je ne peux pas répondre à cette question."; 
   }
 }
 
