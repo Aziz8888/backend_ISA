@@ -1,4 +1,4 @@
-# Node.js Template
+![image](https://github.com/IAStudentAnalytics/backend_ISA/assets/116560510/f689f08f-9f92-45cf-b926-835fe3efd944)# Node.js Template
 
 This repository serves as a template for building a Node.js application. It provides a structured foundation with essential features, frameworks, and tools.
 
@@ -9,15 +9,14 @@ This repository serves as a template for building a Node.js application. It prov
 - **RESTful API:** Follows RESTful principles for a scalable and maintainable architecture.
 - **File Uploads with Multer:** Integrates Multer middleware for handling file uploads.
 - **Error Handling Middleware:** Implements middleware functions for graceful error management.
-- **Dockerized Deployment:** Includes Dockerfile for containerizing the Node.js application.
-- **Docker Compose:** Provides Docker Compose configuration for orchestrating multiple containers, including the Node.js app and MongoDB.
+- **Cloudinary Integration:** Utilizes Cloudinary for managing and serving uploaded files with ease.
 
 ## Usage
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/malek-labidi/template-node-js.git
-   cd template-node-js
+   git clone https://github.com/IAStudentAnalytics/backend_ISA.git
+   cd backend_ISA
    ```
 
 2. **Install Dependencies:**
@@ -30,7 +29,7 @@ This repository serves as a template for building a Node.js application. It prov
 
 4. **Run the Application:**
    ```bash
-   npm run dev
+  node server.js
    ```
 
    This command starts the development server using Nodemon for automatic reloading.
@@ -41,18 +40,18 @@ This repository serves as a template for building a Node.js application. It prov
 
 ## Sample Endpoints:
 
-**GET All Tests:**
-URL: http://localhost:9090/tests
+**Create Compilateur:**
+URL: http://localhost:9090/compilateur_run-code
+Method: POST
+Body: JSON 
+
+**GET TestBlanc:**
+URL: http://localhost:9090/testblanc/test
 Method: GET
 
 **GET Test by ID:**
 URL: http://localhost:9090/tests/:id
 Method: GET
-
-**Create a New Test:**
-URL: http://localhost:9090/tests
-Method: POST
-Body: JSON payload with test details
 
 **Update a Test by ID:**
 URL: http://localhost:9090/tests/:id
@@ -63,11 +62,6 @@ Body: JSON payload with updated test details
 URL: http://localhost:9090/tests/:id
 Method: DELETE
 
-## Additional Commands
 
-- **Start in Production Mode:**
-  ```bash
-  npm start
-  ```
 
-Wishing you the best of luck with your exam!
+Wishing you the best of luck !
