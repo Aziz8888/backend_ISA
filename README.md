@@ -27,12 +27,13 @@ This repository serves as a template for building a Node.js application. It prov
 3. **Configure Environment Variables:**
    - Set up environment variables as needed, e.g., MongoDB connection details.
 
-4. **Run the Application:**
-   ```bash
-  npm start
-   ```
+4. *Run the Application:*
+   
+   npm run dev
+   
 
    This command starts the development server using Nodemon for automatic reloading.
+
 
 5. **Access the Application:**
    - Use [Postman](https://www.postman.com/) or any API testing tool to interact with the application.
