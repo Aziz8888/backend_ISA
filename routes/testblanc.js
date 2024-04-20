@@ -1,7 +1,7 @@
-import { addCompilateur, getQuiz } from "../controllers/compilateur.js";
+import { getQuiz } from "../controllers/testblanc.js";
 import express from "express";
 const router = express.Router();
 
-router.route("/run-code").post(addCompilateur).get(getQuiz);
+router.route("/test").get(getQuiz);
 
 export default router;
