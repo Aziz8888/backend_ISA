@@ -27,9 +27,10 @@ This repository serves as a template for building a Node.js application. It prov
 3. **Configure Environment Variables:**
    - Set up environment variables as needed, e.g., MongoDB connection details.
 
-4. *Run the Application:*
+4. **Run the Application:**
    
-   ```npm run dev
+   ```bash
+   npm run dev
    ```
    
 
