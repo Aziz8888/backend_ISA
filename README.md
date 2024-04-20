@@ -29,7 +29,7 @@ This repository serves as a template for building a Node.js application. It prov
 
 4. **Run the Application:**
    ```bash
-  node server.js
+  npm start
    ```
 
    This command starts the development server using Nodemon for automatic reloading.
