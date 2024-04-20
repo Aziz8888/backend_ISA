@@ -12,7 +12,7 @@ const coursRSchema = new Schema(
             required:true
         },
         description: {
-            type: String, // Vous pouvez ajuster le type selon vos besoins
+            type: String, 
             required: true
         },
         pdff:{
