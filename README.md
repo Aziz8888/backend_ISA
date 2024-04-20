@@ -29,7 +29,8 @@ This repository serves as a template for building a Node.js application. It prov
 
 4. *Run the Application:*
    
-   npm run dev
+   ```npm run dev
+   ```
    
 
    This command starts the development server using Nodemon for automatic reloading.
