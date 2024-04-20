@@ -1,4 +1,4 @@
-![image](https://github.com/IAStudentAnalytics/backend_ISA/assets/116560510/f689f08f-9f92-45cf-b926-835fe3efd944)# Node.js Template
+# Node.js Template
 
 This repository serves as a template for building a Node.js application. It provides a structured foundation with essential features, frameworks, and tools.
 
