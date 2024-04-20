@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import cors from 'cors';
 import compilateur from './routes/compilateur.js';
+import CoursR from './routes/CoursR.js';
 
 const app = express();
 const hostname = '127.0.0.1';
@@ -40,6 +41,7 @@ app.use('/gse', (req,res,next)=> {
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/compilateur', compilateur);
+app.use('/cours',CoursR)
 
 app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
