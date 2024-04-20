@@ -218,26 +218,3 @@ export async function GetCoursR(req, res) {
         res.status(500).json({ error: 'Erreur lors de la récupération du cours' });
     }
 }*/
-/*
-export async function GetCoursR(req, res) {
-    try {
-        const nomCours = req.params.nomCours;
-        console.log('Nom du cours demandé :', nomCours);  // Ajoutez ce log pour vérifier le nom du cours
-        
-        const cours = await CoursR.findOne({ nomCoursR: nomCours });
-
-        if (!cours) {
-            return res.status(404).json({ message: 'Cours non trouvé' });
-        }
-
-        console.log('Cours trouvé :', cours);  // Ajoutez ce log pour vérifier le cours trouvé
-        
-        res.status(200).json(cours);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Erreur lors de la récupération du cours' });
-    }
-}*/
-
-
- 
