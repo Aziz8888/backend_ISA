@@ -1,36 +1,4 @@
-/*import fs from 'fs';
-import path from 'path';
-import CoursR from "../model/CoursR.js";
 
-export async function GetCoursR(req, res) {
-    try {
-        const nomCours = req.params.nomCours;  // Récupérer le nom du cours depuis les paramètres de la requête
-        
-        const cours = await CoursR.findOne({ nomCoursR: nomCours });
-
-        if (!cours) {
-            return res.status(404).json({ message: 'Cours non trouvé' });
-        }
-
-        // Vérifiez si le fichier PDF existe
-        const pdfPath = cours.pdff;
-        if (!fs.existsSync(pdfPath)) {
-            return res.status(404).json({ message: 'Fichier PDF non trouvé' });
-        }
-
-        // Envoyez le fichier PDF en tant que réponse
-        const pdfName = path.basename(pdfPath);
-        const pdfStream = fs.createReadStream(pdfPath);
-
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', `inline; filename=${pdfName}`);
-        
-        pdfStream.pipe(res);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Erreur lors de la récupération du cours' });
-    }
-}*/
 import cloudinary from '../middlewares/cloudinary.js';
 import CoursR from "../models/CoursR.js";
 import fs from 'fs';
