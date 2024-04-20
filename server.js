@@ -1,32 +1,46 @@
 import express from 'express';
-import connectToDatabase from './database.js'; // Chemin vers votre fichier de connexion à la base de données
-//import teacherRoutes from './routes/Teacher.js';
-import { notFoundError,errorHandler } from './middlewares/error-handler.js';
-import path from 'path';
 import bodyParser from 'body-parser';
-// Appel de la fonction pour se connecter à la base de données
+import mongoose from 'mongoose';
+import morgan from 'morgan';
 import cors from 'cors';
-const port = process.env.PORT
-connectToDatabase();
+import compilateur from './routes/compilateur.js';
 
-// Initialisation de l'application Express
 const app = express();
+const hostname = '127.0.0.1';
+const port = process.env.PORT || 9090;
+const databaseName = 'PIIM'
 
-// Middleware pour parser le corps des requêtes en JSON
+mongoose.set('debug', true);
+mongoose.Promise = global.Promise
+mongoose
+mongoose
+.connect(`mongodb://${hostname}:27017/${databaseName}`)
+.then (() => {
+    console.log(`Connected to ${databaseName}`)
+})
+.catch(err =>{
+    console.log(err)
+});
+app.use(cors());
+app.use(morgan('dev'));
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+//app.use('/img', express.static('public'));
+
+app.use((req,res,next)=>{
+    console.log("Middleware just ran !");
+    next();
+});
+
+app.use('/gse', (req,res,next)=> {
+    console.log("Middleware just ran on a gse route !")
+    next();
+});
+
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/compilateur', compilateur);
 
-// Définition des routes
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-//app.use('/api/teachers', teacherRoutes);
-app.use(notFoundError);
-app.use(errorHandler);
-
-// Démarre le serveur sur le port spécifié dans le fichier .env ou le port 5000 par défaut
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
 });

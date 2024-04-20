@@ -1,4 +1,4 @@
-import multer from "../middleware/multer-config.js";
+import multer from "../middlewares/multer-config.js";
 import { AjouterCoursR, GetAllCours, GetCoursR, deleteById } from "../controllers/CoursR.js";
 import {getQuiz} from "../controllers/compilateur.js";
 import express from "express";
