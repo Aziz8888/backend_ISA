@@ -72,6 +72,7 @@ export async function GetCoursR(req, res) {
             return res.status(404).json({ message: 'Fichier PDF non trouvé' });
         }
 
+        
         const pdfName = path.basename(pdfPath);
         const pdfStream = fs.createReadStream(pdfPath);
 
