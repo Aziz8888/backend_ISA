@@ -4,9 +4,9 @@ import Note from '../models/note.js';
 // Cette fonction pourrait être améliorée pour gérer les erreurs et cas particuliers plus spécifiques
 export async function submitAnswers(req, res) {
   try {
-    const { testId, studentId, answers } = req.body; // Récupération des données de la requête
+    const { testId, answers } = req.body; // Récupération des données de la requête
     const test = await Test.findById(testId).populate('questions'); // Trouver le test et peupler les questions
-
+    const studentId = req.user._id;
     if (!test) {
       return res.status(404).json({ message: 'Test not found' });
     }
@@ -34,7 +34,7 @@ export async function submitAnswers(req, res) {
 
       // Créer et sauvegarder une note pour chaque réponse
       const note = new Note({
-        studentId,
+        studentId: mongoose.Types.ObjectId(studentId),
         questionId: question._id,
         testId: testId,
         score,
