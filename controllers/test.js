@@ -144,3 +144,45 @@ export async function getTestByTitle(req, res, next) {
     res.status(404).json({ message: error.message });
   }
 }
+export async function getChaptersByTestId(req, res) {
+  try {
+    const { testId } = req.params;
+
+    // Trouver le test par son ID et peupler les questions pour accéder aux chapitres
+    const test = await Test.findById(testId).populate('questions');
+    if (!test) {
+      return res.status(404).json({ message: 'Test not found' });
+    }
+
+    // Créer un ensemble pour stocker les chapitres uniques
+    const chaptersSet = new Set();
+
+    // Ajouter le chapitre de chaque question à l'ensemble pour éviter les doublons
+    test.questions.forEach(question => {
+      chaptersSet.add(question.chapitre);
+    });
+
+    // Convertir l'ensemble en tableau pour le renvoyer
+    const chapters = [...chaptersSet];
+
+    res.status(200).json({ chapters });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
+export async function getTestById(req, res) {
+  try {
+      const { id } = req.params;  // Récupération de l'ID du test depuis les paramètres de la route
+
+      // Trouver le test par son ID et peupler les questions pour accéder aux détails complets
+      const test = await Test.findById(id).populate('questions');
+
+      if (!test) {
+          return res.status(404).json({ message: 'Test not found' });
+      }
+
+      res.status(200).json(test);  // Renvoyer le test trouvé
+  } catch (error) {
+      res.status(400).json({ message: error.message });  // Gestion des erreurs potentielles
+  }
+}
