@@ -20,12 +20,13 @@ connectToDatabase();
 const app = express();
 
 // Middleware pour parser le corps des requêtes en JSON
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
+
 
 // Définition des routes
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.send('Hello World!');
 });
 app.get('/upload/:folder/:filename',(req,res)=> {
@@ -41,11 +42,23 @@ app.get('/upload/:folder/:filename',(req,res)=> {
     }
   })
 })
+app.use((req, _res, next) => {
+  console.log("Received headers:", req.headers);
+  console.log("Received body:", req.body);
+  next();
+});
+app.get('/api/user/getUserDetailsByEmail/:email', (req, _res) => {
+  console.log("Received email: ", req.params.email); // Check the email received by the server
+  console.log("Request headers: ", req.headers); // Check headers
+  // existing code...
+});
+
+
 app.use('/api/students',studentsRoutes);
 app.use('/api/performances',performancesRoutes);
 app.use('/api/teachers', teacherRoutes);
 app.use('/api/user', userRoutes);
-app.use('/api/user/email', userRoutes);
+app.use('/api/user/getUserDetailsByEmail', userRoutes);
 app.use('/Question', questionRoutes);
 app.use('/test', testRoutes);
 app.use('/compilateur', compilateur);

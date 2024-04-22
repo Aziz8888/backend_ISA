@@ -6,5 +6,5 @@ const router = express.Router();
 // Route de connexion
 router.post('/login', login);
 // Route pour récupérer un utilisateur par son adresse e-mail
-router.get('/getUserByEmail/:email', getUserDetailsByEmail);
+router.get('/getUserDetailsByEmail/:email', getUserDetailsByEmail);
 export default router;

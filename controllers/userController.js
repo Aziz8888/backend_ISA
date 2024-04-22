@@ -1,33 +1,51 @@
 import jwt from 'jsonwebtoken';
 import Enseignant from '../models/enseignantModel.js';
 import Student from '../models/student.js';
+import Teacher from '../models/Teacher.js';
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Recherche d'un enseignant
-    const enseignant = await Enseignant.findOne({ email, password });
-    if (enseignant) {
-      // Générer un jeton JWT pour l'enseignant
-      const token = jwt.sign({ userId: enseignant._id, role: 'enseignant' }, 'a1b2c3d4e5f6g7h8i9j10k11l12m13n14o15p16q17r18s19t20u21v22w23x24y25z26', { expiresIn: '1h' });
+    // Attempt to find a teacher with the given email and password
+    const teacher = await Teacher.findOne({ email: email, password: password });
+    if (teacher) {
+      // Generate a JWT token for the teacher
+      const token = jwt.sign(
+        { userId: teacher._id, role: 'teacher' }, 
+        'a1b2c3d4e5f6g7h8i9j10k11l12m13n14o15p16q17r18s19t20u21v22w23x24y25z26',  // Make sure to use a real secret from your configuration
+        { expiresIn: '1h' }
+      );
 
-      return res.status(200).json({ message: "Connexion réussie en tant qu'enseignant", user: enseignant, token });
+      return res.status(200).json({
+        message: "Login successful as teacher",
+        user: teacher,
+        token: token
+      });
     }
 
-    // Recherche d'un étudiant
-    const student = await Student.findOne({ email, password });
+    // If not found, then try finding a student
+    const student = await Student.findOne({ email: email, password: password });
     if (student) {
-      // Générer un jeton JWT pour l'étudiant
-      const token = jwt.sign({ userId: student._id, role: 'student' }, 'a1b2c3d4e5f6g7h8i9j10k11l12m13n14o15p16q17r18s19t20u21v22w23x24y25z26', { expiresIn: '1h' });
+      // Generate a JWT token for the student
+      const token = jwt.sign(
+        { userId: student._id, role: 'student' }, 
+        'a1b2c3d4e5f6g7h8i9j10k11l12m13n14o15p16q17r18s19t20u21v22w23x24y25z26',  // Use the same secret here
+        { expiresIn: '1h' }
+      );
 
-      return res.status(200).json({ message: "Connexion réussie en tant qu'étudiant", user: student, token });
+      return res.status(200).json({
+        message: "Login successful as student",
+        user: student,
+        token: token
+      });
     }
 
-    // Aucun utilisateur trouvé avec cet identifiant
-    return res.status(404).json({ message: "Identifiant ou mot de passe incorrect" });
+    // If no user is found in either collection
+    return res.status(404).json({ message: "Invalid email or password" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Login error:", error);
+    res.status(500).json({ message: "An error occurred during login" });
   }
 };
 // Fonction pour récupérer un utilisateur par son adresse e-mail
@@ -36,9 +54,9 @@ export const getUserDetailsByEmail = async (req, res) => {
 
   try {
     // Recherche d'un enseignant par email
-    const enseignant = await Enseignant.findOne({ email });
+    const enseignant = await Teacher.findOne({ email });
     // Recherche d'un étudiant par email si aucun enseignant n'a été trouvé
-    const user = enseignant || await Student.findOne({ email });
+    const user = Student || await Student.findOne({ email });
 
     if (!user) {
       // Aucun utilisateur trouvé avec cet email
@@ -46,7 +64,7 @@ export const getUserDetailsByEmail = async (req, res) => {
     }
 
     // Générer un jeton JWT pour l'utilisateur trouvé
-    const token = jwt.sign({ userId: user._id, role: user.role }, 'your-secret-key-here', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id, role: user.role }, 'a1b2c3d4e5f6g7h8i9j10k11l12m13n14o15p16q17r18s19t20u21v22w23x24y25z26', { expiresIn: '1h' });
 
     // Retourner les détails de l'utilisateur avec le token
     return res.status(200).json({ user, token });
