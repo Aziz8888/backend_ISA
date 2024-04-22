@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { createTest, deleteTestById, getAllTests, getTestByTitle, updateTest } from '../controllers/test.js';
+import { getTestById,getChaptersByTestId,createTest, deleteTestById, getAllTests, getTestByTitle, updateTest } from '../controllers/test.js';
 
 router
   .route('/createTest')
@@ -15,11 +15,16 @@ router
   .get(getAllTests);
 
 router
-  .route('/getTest')
+  .route('/getTest/:title')
   .get(getTestByTitle);
 
 router
   .route('/deleteTest/:id')
   .delete(deleteTestById);
+
+router.get('/tests/:testId/chapters', getChaptersByTestId);
+
+router.get('/tests/:id', getTestById);
+
   
 export default router;

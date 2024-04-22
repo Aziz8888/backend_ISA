@@ -3,6 +3,7 @@ import connectToDatabase from './database.js'; // Chemin vers votre fichier de c
 import teacherRoutes from './routes/Teacher.js';
 import userRoutes from './routes/user.js';
 import compilateur from './routes/compilateur.js';
+import noteRoutes from './routes/note.js';
 import { notFoundError,errorHandler } from './middlewares/error-handler.js';
 import path from 'path';
 import questionRoutes from './routes/Question.js';
@@ -53,7 +54,7 @@ app.get('/api/user/getUserDetailsByEmail/:email', (req, _res) => {
   // existing code...
 });
 
-
+app.use('/note', noteRoutes);
 app.use('/api/students',studentsRoutes);
 app.use('/api/performances',performancesRoutes);
 app.use('/api/teachers', teacherRoutes);
