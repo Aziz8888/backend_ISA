@@ -3,15 +3,47 @@ import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
 const teacherSchema = new Schema({
-  idTea: { type: Number, required: true },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  email: { type: String, required: true },
-  class: { type: String, required: true }, // Utilisation de guillemets inversés pour 'class'
-  cin: { type: Number, required: true },
-  password: { type: String, required: true },
-  field: { type: String, required: true }
+ 
+ 
+  idTea:{
+    type: Number,
+    
+  },
+  firstName: {
+    type: String,
+  
+  },
+  lastName: {
+    type: String,
+    
+  },
+  email: {
+    type: String,
+   
+  },
+  class: {
+    type: String,
+   
+  },
+  cin: {
+    type: Number,
+    
+  },
+  password: {
+    type: String,
+   
+  },
+  field: {
+    type: String,
+   
+  },
+  
+  
+  
+ 
 });
+
+
 
 const Teacher = model('Teacher', teacherSchema);
 
