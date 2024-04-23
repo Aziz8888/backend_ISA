@@ -8,7 +8,7 @@ const coursRSchema = new Schema(
 
         nomCoursR:{
             type:String,
-            enum: ["Les classes et les objets", "L'héritage", "le polymorphisme", "Les interfaces", "encapsulation"],
+            enum: ["Les classes et les objets", "L'héritage", "Le polymorphisme", "Les interfaces", "Encapsulation"],
             required:true
         },
         description: {
