@@ -3,7 +3,9 @@ import cheerio from "cheerio";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { findBestMatch } from "string-similarity";
 
-const ai = new GoogleGenerativeAI("AIzaSyCb__QQxCrc15mbnhjGDxJOeDMF5K_2NAo");
+//const ai = new GoogleGenerativeAI("AIzaSyCb__QQxCrc15mbnhjGDxJOeDMF5K_2NAo");
+const ai = new GoogleGenerativeAI("AIzaSyD6lQ21fgJlrWTPhr_BWYpM9_MDf6IV9Y0");
+
 const chapters = [
   "Les classes et les objets",
   "L'héritage",
