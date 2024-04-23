@@ -1,35 +1,11 @@
-import { config } from "dotenv";
 import axios from "axios";
 import cheerio from "cheerio";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { findBestMatch } from "string-similarity";
 
-config();
+//const ai = new GoogleGenerativeAI("AIzaSyCb__QQxCrc15mbnhjGDxJOeDMF5K_2NAo");
+const ai = new GoogleGenerativeAI("AIzaSyD6lQ21fgJlrWTPhr_BWYpM9_MDf6IV9Y0");
 
-const staticVariables = {
-  clientId: process.env.JDoodleClientId,
-  clientSecret: process.env.JDoodleClientSecret,
-  stdin: "",
-  language: "java",
-  versionIndex: 3,
-};
-
-const ai = new GoogleGenerativeAI("AIzaSyCb__QQxCrc15mbnhjGDxJOeDMF5K_2NAo");
-
-
-export async function addCompilateur(req, res) {
-  try {
-    const { script } = req.body;
-    const requestData = { ...staticVariables, script };
-    const response = await axios.post(
-      "https://api.jdoodle.com/v1/execute",
-      requestData
-    );
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: "Erreur lors de l'exécution du code" });
-  }
-}
 const chapters = [
   "Les classes et les objets",
   "L'héritage",
@@ -86,11 +62,10 @@ export async function sendQuizToIA(question) {
     const result = await model.generateContent(question);
     const response = await result.response;
     const text = await response.text();
-   
-    return text; 
+
+    return text;
   } catch (error) {
- 
-    return "Désolé, je ne peux pas répondre à cette question."; 
+    return "Désolé, je ne peux pas répondre à cette question.";
   }
 }
 

@@ -2,7 +2,8 @@ import express from 'express';
 import connectToDatabase from './database.js'; // Chemin vers votre fichier de connexion à la base de données
 import teacherRoutes from './routes/Teacher.js';
 import userRoutes from './routes/user.js';
-import compilateur from './routes/compilateur.js';
+import compilateur from "./routes/compilateur.js";
+import testblanc from "./routes/testblanc.js";
 import noteRoutes from './routes/note.js';
 import { notFoundError,errorHandler } from './middlewares/error-handler.js';
 import path from 'path';
@@ -62,7 +63,8 @@ app.use('/api/user', userRoutes);
 app.use('/api/user/getUserDetailsByEmail', userRoutes);
 app.use('/Question', questionRoutes);
 app.use('/test', testRoutes);
-app.use('/compilateur', compilateur);
+app.use("/compilateur", compilateur);
+app.use("/testblanc", testblanc);
 app.use(notFoundError);
 app.use(errorHandler);
 
