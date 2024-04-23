@@ -1,5 +1,3 @@
-// models/Note.js
-
 import mongoose from 'mongoose';
 
 const noteSchema = new mongoose.Schema({
@@ -8,27 +6,27 @@ const noteSchema = new mongoose.Schema({
     required: true,
     ref: 'Student'  // Assumant que vous avez un modèle Student
   },
-  questionId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'Question'
-  },
   testId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'test'
+    ref: 'Test'
   },
-  score: {
+  totalScore: {
     type: Number,
     required: true
   },
-  chapitre: {
-    type: String,
-    required: false
+  totalScoreByChapter: {
+    type: Object, // Un objet où les clés sont les identifiants de chapitre et les valeurs sont les scores totaux par chapitre
+    required: true
   },
-  complexity: {
-    type: Number,
-    required: false
+  notes: {
+    type: Map,
+    of: new mongoose.Schema({
+      score: Number,
+      chapitre: String,
+      complexity: Number
+    }),
+    required: true
   }
 });
 

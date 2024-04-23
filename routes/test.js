@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { getTestById,getChaptersByTestId,createTest, deleteTestById, getAllTests, getTestByTitle, updateTest } from '../controllers/test.js';
+import { getChaptersByTestId,createTest, deleteTestById, getAllTests, getTestByTitle, updateTest } from '../controllers/test.js';
 
 router
   .route('/createTest')
@@ -24,7 +24,6 @@ router
 
 router.get('/tests/:testId/chapters', getChaptersByTestId);
 
-router.get('/tests/:id', getTestById);
 
   
 export default router;
