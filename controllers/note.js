@@ -103,8 +103,7 @@ async function calculateTotalMarksByChapter(testId) {
 
 export async function recommanderVideosEtudiant(req, res) {
   try {
-    const { testId, } = req.params;
-    const studentId = req.user._id;
+
 
     // Recherchez la note correspondante dans la base de données en fonction des IDs du test et de l'étudiant
     const note = await Note.findOne({ testId, studentId });

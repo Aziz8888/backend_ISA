@@ -5,6 +5,7 @@ import userRoutes from './routes/user.js';
 import compilateur from "./routes/compilateur.js";
 import testblanc from "./routes/testblanc.js";
 import noteRoutes from './routes/note.js';
+import CoursR from './routes/CoursR.js';
 import { notFoundError,errorHandler } from './middlewares/error-handler.js';
 import path from 'path';
 import questionRoutes from './routes/Question.js';
@@ -54,7 +55,19 @@ app.get('/api/user/getUserDetailsByEmail/:email', (req, _res) => {
   console.log("Request headers: ", req.headers); // Check headers
   // existing code...
 });
+app.use(express.urlencoded({extended:true}));
+//app.use('/img', express.static('public'));
 
+app.use((req,res,next)=>{
+    console.log("Middleware just ran !");
+    next();
+});
+
+app.use('/gse', (req,res,next)=> {
+    console.log("Middleware just ran on a gse route !")
+    next();
+});
+app.use('/cours',CoursR)
 app.use('/note', noteRoutes);
 app.use('/api/students',studentsRoutes);
 app.use('/api/performances',performancesRoutes);

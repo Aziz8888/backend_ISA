@@ -105,10 +105,12 @@ export async function updateTest(req, res, next) {
 export async function deleteTestById(req, res, next) {
   try {
     const { id } = req.params;
-
-    const message = await deleteTest(id);
-
-    res.status(200).json({ message });
+    const test = Test.findById(id)
+    if (!test) {
+      throw new Error('Test not found');
+    }
+    await test.deleteOne();
+    res.status(200).json({ message: 'Test deleted' });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

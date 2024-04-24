@@ -9,9 +9,9 @@ const ai = new GoogleGenerativeAI("AIzaSyD6lQ21fgJlrWTPhr_BWYpM9_MDf6IV9Y0");
 const chapters = [
   "Les classes et les objets",
   "L'héritage",
-  "le polymorphisme",
+  "Le polymorphisme",
   "Les interfaces",
-  "encapsulation",
+  "Encapsulation",
 ];
 export async function getQuiz(req, res) {
   try {
