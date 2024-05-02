@@ -188,7 +188,27 @@ export async function recommanderVideosEtudiant(req, res) {
     res.status(500).json({ message: "Internal server error" });
   }
 }
+export async function getAllScoresByChapter(_req, res) {
+  try {
+    const allNotes = await Note.find({ totalScoreByChapter: { $ne: null } });
 
+    let combinedScoresByChapter = {};
+
+    allNotes.forEach((notes) => {
+      Object.entries(notes.totalScoreByChapter).forEach(([chapitre, score]) => {
+        if (combinedScoresByChapter[chapitre]) {
+          combinedScoresByChapter[chapitre] += score;
+        } else {
+          combinedScoresByChapter[chapitre] = score;
+        }
+      });
+    });
+
+    res.json(combinedScoresByChapter);
+  } catch (error) {
+    res.status(500).send("Error retrieving scores by chapter: " + error.message);
+  }
+}
 export async function getScoreByChapter(req, res) {
   try {
       const userId = req.params.userId;

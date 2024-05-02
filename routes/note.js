@@ -1,7 +1,7 @@
 import express from "express";
 import {
   submitAnswers,
-  recommanderVideosEtudiant,getScoreByChapter
+  recommanderVideosEtudiant,getScoreByChapter,getAllScoresByChapter
 } from "../controllers/note.js"; // Assurez-vous que le chemin d'importation est correct
 
 const router = express.Router();
@@ -10,5 +10,5 @@ const router = express.Router();
 router.post("/tests/submit/", submitAnswers);
 router.get("/rec/:testId/:studentId", recommanderVideosEtudiant);
 router.get("/scores/:userId/", getScoreByChapter);
-
+router.get("/all-scores/", getAllScoresByChapter);
 export default router;
