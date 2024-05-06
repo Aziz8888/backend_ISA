@@ -1,71 +1,16 @@
-# Node.js Template
+# performance
 
-This repository serves as a template for building a Node.js application. It provides a structured foundation with essential features, frameworks, and tools.
+A new Flutter project.
 
-## Features
+## Getting Started
 
-- **Express.js Backend:** Utilizes Express.js for handling routes, requests, and responses.
-- **MongoDB Integration:** Optional MongoDB integration for seamless data persistence.
-- **RESTful API:** Follows RESTful principles for a scalable and maintainable architecture.
-- **File Uploads with Multer:** Integrates Multer middleware for handling file uploads.
-- **Error Handling Middleware:** Implements middleware functions for graceful error management.
-- **Cloudinary Integration:** Utilizes Cloudinary for managing and serving uploaded files with ease.
+This project is a starting point for a Flutter application.
 
-## Usage
+A few resources to get you started if this is your first Flutter project:
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/IAStudentAnalytics/backend_ISA.git
-   cd backend_ISA
-   ```
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-2. **Install Dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment Variables:**
-   - Set up environment variables as needed, e.g., MongoDB connection details.
-
-4. **Run the Application:**
-   
-   ```bash
-   node server.js
-   ```
-   
-
-   This command starts the development server using Nodemon for automatic reloading.
-
-
-5. **Access the Application:**
-   - Use [Postman](https://www.postman.com/) or any API testing tool to interact with the application.
-   - Base URL: [http://localhost:9090](http://localhost:9090)
-
-## Sample Endpoints:
-
-**Create Compilateur:**
-URL: http://localhost:9090/compilateur_run-code
-Method: POST
-Body: JSON 
-
-**GET TestBlanc:**
-URL: http://localhost:9090/testblanc/test
-Method: GET
-
-**GET Test by ID:**
-URL: http://localhost:9090/tests/:id
-Method: GET
-
-**Update a Test by ID:**
-URL: http://localhost:9090/tests/:id
-Method: PUT
-Body: JSON payload with updated test details
-
-**Delete a Test by ID:**
-URL: http://localhost:9090/tests/:id
-Method: DELETE
-
-
-  
-
-Wishing you the best of luck !
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

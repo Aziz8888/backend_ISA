@@ -1,0 +1,4 @@
+<resources>
+    <string name="channel_name">Standard Notifications</string>
+    <string name="channel_description">General notifications for the app</string>
+</resources>

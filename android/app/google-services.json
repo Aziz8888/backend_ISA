@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "543868268642",
+    "project_id": "eduswift-12eeb",
+    "storage_bucket": "eduswift-12eeb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543868268642:android:038712c11f7f3c5171613b",
+        "android_client_info": {
+          "package_name": "com.example.performance"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYxzxos704C56V8czZj54xMopFvCWrQq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
