@@ -308,3 +308,26 @@ export async function predictWithFlask(req, res) {
     res.status(500).json({ error: "Erreur lors de la prédiction avec Flask" });
   }
 }
+
+
+export async function askAIQuestion(req, res) {
+  try {
+    // Récupérer la question de la requête
+    const { question } = req.body;
+
+    // Envoyer la question au serveur Flask
+    const flaskResponse = await axios.post(
+      "http://127.0.0.1:5001/ask", // Assurez-vous de changer le port si nécessaire
+      { user_input: question }
+    );
+
+    // Récupérer la réponse du serveur Flask
+    const aiResponse = flaskResponse.data.response;
+
+    // Renvoyer la réponse de l'IA à l'utilisateur
+    res.status(200).json({ response: aiResponse });
+  } catch (error) {
+    console.error("Erreur lors de la communication avec le serveur Flask:", error);
+    res.status(500).json({ error: "Erreur lors de la communication avec le serveur Flask" });
+  }
+}

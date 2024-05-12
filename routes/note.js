@@ -6,6 +6,7 @@ import {
   getAllScoresByChapter,
   getTotalScoreByTestIdAndStudentId,
   predictWithFlask,
+  askAIQuestion,
 } from "../controllers/note.js"; // Assurez-vous que le chemin d'importation est correct
 
 const router = express.Router();
@@ -18,5 +19,6 @@ router.get("/all-scores/", getAllScoresByChapter);
 router.get("/scores/:userId/", getScoreByChapter);
 router.get("/totales/:testId/:studentId", getTotalScoreByTestIdAndStudentId);
 router.post("/predictWithFlask", predictWithFlask);
+router.post("/ask", askAIQuestion);
 
 export default router;

@@ -21,10 +21,10 @@ const teacherSchema = new Schema({
     type: String,
    
   },
-  class: {
+  class: [{
     type: String,
    
-  },
+  }],
   cin: {
     type: Number,
     

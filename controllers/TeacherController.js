@@ -1,4 +1,5 @@
 import Teacher from '../models/Teacher.js';
+import Student from '../models/student.js';
 
 const addTeacher = async (req, res) => {
   try {
@@ -60,4 +61,28 @@ const updateTeacher = async (req, res) => {
   }
 };
 
-export default { addTeacher, getTeacherById, getAllTeachers, updateTeacher };
+const getTeachersStudents = async (req, res) => {
+  try {
+    const teacherId = req.params.teacherId;
+    const teacher = await Teacher.findById(teacherId);
+
+    if (!teacher) {
+      return res.status(404).json({ error: 'Teacher not found' });
+    }
+
+    const studentsByClass = {};
+
+    // Fetch students for each class
+    for (const className of teacher.class) {
+      const students = await Student.find({ class: className });
+      studentsByClass[className] = students;
+    }
+
+    res.json(studentsByClass);
+  } catch (error) {
+    console.error('Error fetching students:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+export default { addTeacher, getTeacherById, getAllTeachers, updateTeacher, getTeachersStudents };

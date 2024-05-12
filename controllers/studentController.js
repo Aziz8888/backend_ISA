@@ -84,3 +84,19 @@ export async function updateById  (req, res) {
     }
   }
   
+  export async function getStudentByClass(req, res, next) {
+    try {
+        const { className } = req.params;
+
+        // Find the student(s) by class name
+        const students = await Student.find({ class: className });
+
+        if (!students || students.length === 0) {
+            throw new Error('Students not found for the specified class');
+        }
+
+        res.status(200).json(students);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}

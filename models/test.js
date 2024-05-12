@@ -18,7 +18,8 @@ const testSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   testDate: {type: Date, required: true},
-  duration: { type: Number, required: true }
+  duration: { type: Number, required: true },
+  studentsClass: { type: String, required: true}
 });
 
 const Test = model('Test', testSchema);
